@@ -25,6 +25,4 @@ urlpatterns = [
     url(r'^api/list', views.list),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

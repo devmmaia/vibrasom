@@ -3,7 +3,7 @@ from django.http import JsonResponse
 # Create your views here.
 from .forms import SongForm
 from django.core.files.storage import FileSystemStorage
-
+from .models import Song
 
 def upload(request):
     if request.method == 'POST' and request.FILES['musica']:
@@ -19,4 +19,8 @@ def upload(request):
 
 
 def list(request):
-    return JsonResponse({"1": "happy"})
+    songs = Song.objects.all()
+    list_songs = list(map(lambda s: {"id": s.id, "titulo":  s.titulo}, songs))
+    map()
+    
+    return JsonResponse({"songs": list_songs,})
