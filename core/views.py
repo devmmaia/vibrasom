@@ -18,9 +18,12 @@ def upload(request):
     return render(request, 'core/upload.html', locals())
 
 
+def _song_json(song):
+    return {"id": song.id, "titulo": song.titulo}
+
+
 def list(request):
     songs = Song.objects.all()
-    list_songs = list(map(lambda s: {"id": s.id, "titulo":  s.titulo}, songs))
-    map()
+    list_songs = [_song_json(s) for s in songs]
     
-    return JsonResponse({"songs": list_songs,})
+    return JsonResponse({"songs": list_songs, })   
