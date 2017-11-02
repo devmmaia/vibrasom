@@ -23,6 +23,8 @@ from . import views
 urlpatterns = [
     url(r'^upload/', views.upload),
     url(r'^api/list', views.list),
+    url(r'^api/converte/(?P<id>[0-9]+)/$', views.converte),
+    
 ]
 
 

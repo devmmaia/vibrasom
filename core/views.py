@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from .forms import SongForm
 from django.core.files.storage import FileSystemStorage
 from .models import Song
+from . import conversao
+
 
 def upload(request):
     if request.method == 'POST' and request.FILES['musica']:
@@ -27,3 +29,9 @@ def list(request):
     list_songs = [_song_json(s) for s in songs]
     
     return JsonResponse({"songs": list_songs, })   
+
+def converte(request, id):
+    song = Song.objects.get(pk=id)
+    padrao = conversao.get_padrao_vibracao(song.arquivo.file)
+    return JsonResponse({"padrao": padrao, })
+
