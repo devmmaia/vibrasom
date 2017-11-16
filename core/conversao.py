@@ -1,5 +1,5 @@
-from pydub import AudioSegment
-from pydub import silence
+from pydub import AudioSegment, silence
+
 
 def get_padrao_vibracao(wav_path):
     ''' retorna um padrao de vibracao em decimais,
@@ -18,31 +18,24 @@ def get_padrao_vibracao(wav_path):
 
 
       '''
-      
     musica = AudioSegment.from_wav(wav_path)
 
-    tamanho = len(musica)
-
     nonsilence = silence.detect_nonsilent(musica, min_silence_len=100)
-    silent = silence.detect_silence(musica, min_silence_len=100)
+    
     retorno = []
 
-    primeiro_intervalo = nonsilence[0]
-
-    anterior = 0  
+    anterior = 0
     
     for intervalo in nonsilence:
-        silencio = (intervalo[0]) - anterior 
+        silencio = intervalo[0] - anterior
         retorno.append([silencio, 0])
         
-        vibracao = (intervalo[1]) - intervalo[0]
+        vibracao = intervalo[1] - intervalo[0]
         retorno.append([vibracao, 1])
 
         anterior = intervalo[1]     
 
     if retorno[0][0] <= 0:
         retorno = retorno[1:]
-
-
 
     return retorno
