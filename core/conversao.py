@@ -2,7 +2,7 @@ from pydub import AudioSegment, silence
 
 
 def get_padrao_vibracao(wav_path):
-    ''' retorna um padrao de vibracao em decimais,
+    ''' retorna um padrao de vibracao.
         O primeiro valor de cada item indica o tempo em
         decimos de segundo. O segundo valor indica se durante
         esse tempo, deve ou nao vibrar. \n
